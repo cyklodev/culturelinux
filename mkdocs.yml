@@ -25,5 +25,6 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Linux: 
+    - 'Environement' : linux/environnement.md
     - 'History' : linux/history.md
     - 'Users' : linux/users.md
