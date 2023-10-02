@@ -9,4 +9,4 @@
     mkdics serve
 
 ## Build
-    mkdics serve    
+    mkdics build    
