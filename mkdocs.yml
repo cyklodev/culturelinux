@@ -1,0 +1,29 @@
+site_name: CKDocs
+site_url: https://ckd-ocs.kube.cyklodev.com
+
+theme: 
+  name: material
+  palette:
+    scheme: slate  
+  #features:
+  #  - navigation.tabs
+  #  - navigation.tabs.sticky
+  #  - navigation.indexes 
+extra:
+  generator: false
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+
+nav:
+  - Home: index.md
+  - Linux: 
+    - 'History' : linux/history.md
+    - 'Users' : linux/users.md
