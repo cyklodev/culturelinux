@@ -28,3 +28,5 @@ nav:
     - 'Environement' : linux/environnement.md
     - 'History' : linux/history.md
     - 'Users' : linux/users.md
+  - Debian: 
+    - 'Network' : debian/network.md  

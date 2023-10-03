@@ -1,5 +1,9 @@
 # Bash
 ## Alias
+
+### List
+    $ alias
+
 ### shell
     alias cp='cp -i'
     alias dfg='df -h'
