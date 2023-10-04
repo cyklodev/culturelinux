@@ -21,12 +21,15 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
 
-
 nav:
   - Home: index.md
   - Linux: 
     - 'Environement' : linux/environnement.md
     - 'History' : linux/history.md
     - 'Users' : linux/users.md
+    - 'Security' : linux/security.md    
+    - 'Nmap' : linux/nmap.md
   - Debian: 
-    - 'Network' : debian/network.md  
+    - 'Network' : debian/network.md
+    - 'NFTables' : debian/nftables.md    
+    - 'Email' : debian/msmtp.md        
