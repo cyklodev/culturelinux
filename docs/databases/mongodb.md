@@ -102,6 +102,12 @@ admin> db.getUsers()
 }
 ```
 
+### Change password
+```
+admin> db.changeUserPassword("svc_backup","mysqlpwd")
+{ ok: 1 }
+```
+
 ## Database
 ### Create 
 ```
