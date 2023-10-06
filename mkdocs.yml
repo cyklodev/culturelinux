@@ -33,3 +33,5 @@ nav:
     - 'Network' : debian/network.md
     - 'NFTables' : debian/nftables.md    
     - 'Email' : debian/msmtp.md        
+  - Databases: 
+    - 'MongoDB' : databases/mongodb.md    
