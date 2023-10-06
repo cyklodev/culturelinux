@@ -51,7 +51,7 @@ MongoServerError: Command listCollections requires authentication
 ```
 * success
 ```
-$ mongosh mongodb://admin:mysqlpwd@localhost:27017/test --authenticationDatabase admin
+$ mongosh mongodb://admin:admin_pwd@localhost:27017/test --authenticationDatabase admin
 test> db.getCollectionNames()
 []
 ```
@@ -59,7 +59,7 @@ test> db.getCollectionNames()
 ## Users
 ### get
 ```
-$ mongosh mongodb://admin:mysqlpwd@localhost:27017/test --authenticationDatabase admin
+$ mongosh mongodb://admin:admin_pwd@localhost:27017/test --authenticationDatabase admin
 admin> db.getUsers()
 {
   users: [
