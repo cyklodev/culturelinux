@@ -108,6 +108,25 @@ admin> db.changeUserPassword("svc_backup","mysqlpwd")
 { ok: 1 }
 ```
 
+## Connect
+### auto connect
+vi ~/.mongoshrc.js
+```
+db = connect("localhost:27017/admin");
+db.auth('admin','mysqlpwd')
+```
+
+```
+mongosh --authenticationDatabase admin --norc -u otheruser -p
+```
+
+### no autoconnect
+```
+mongosh --authenticationDatabase admin
+```
+
+
+
 ## Database
 ### Create 
 ```
