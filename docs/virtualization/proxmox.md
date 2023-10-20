@@ -6,11 +6,12 @@
     pveum role add Terraform -privs "VM.Allocate VM.Clone VM.Config.CDROM VM.Config.CPU VM.Config.Cloudinit VM.Config.Disk VM.Config.HWType VM.Config.Memory VM.Config.Network VM.Config.Options VM.Monitor VM.Audit VM.PowerMgmt Datastore.AllocateSpace Datastore.Audit"
 #### Add user
     pveum user add terraform@pve -password XXXXXXXX -comment "Terraform account"
-#### ling role user
+#### link role user
     pveum aclmod / -user terraform@pve -role Terraform
 #### generate token
     pveum user token add terraform@pve terraform -expire 0 -privsep 0 -comment "Terraform token"
-
+#### test tocken
+    curl -X GET 'https://$PROXMOX_URL:8006/api2/json/nodes' -H 'Authorization: PVEAPIToken=terraform@pve!terraform=$TOKEN'
 ## Build template
 ### get qcow image
     cd /tmp && wget https://cloud.debian.org/images/cloud/bookworm/20231013-1532/debian-12-genericcloud-amd64-20231013-1532.qcow2

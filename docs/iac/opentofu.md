@@ -23,13 +23,13 @@
 
 ### vars.tf
     variable  "pm_api_url" {
-        default =  "https://proxmox.fqdn:8006/api2/json"
+        default =  "https://$PROXMOX_URL:8006/api2/json"
     }
     variable  "pm_api_token_id" {
         default =  "terraform@pve!terraform"
     }
     variable  "pm_api_token_secret" {
-        default =  "XXXXXXXXXXXXXXXXXXXXXXXX"
+        default =  "$TOKEN"
     }
     variable  "target_node" {
         default =  "proxmox2"
@@ -39,4 +39,39 @@
     }
     variable  "ssh_key" {
         default =  "ssh-ed25519 XXXXXXXXXXXXXXXX clinux@mothership"
+    }
+
+### main.tf
+    resource "proxmox_vm_qemu" "tp_servers" {
+    desc = "Deploiement VM Debian 12 sur Proxmox"
+    count = 1
+    name = "prox2-debian-${count.index + 1}"
+    target_node = var.target_node
+    clone = var.clone
+    os_type = "cloud-init"
+    cores = 2
+    sockets = 1
+    cpu = "host"
+    memory = 2048
+    scsihw = "virtio-scsi-pci"
+    bootdisk = "scsi0"
+
+    disk {
+        slot = 0
+        size = "40G"
+        type = "scsi"
+        storage = "local-lvm"
+        #iothread = 1
+    }
+
+    network {
+        model = "virtio"
+        bridge = "vmbr0"
+    }
+
+    ipconfig0 = "ip=192.168.1.${count.index + 170}/24,gw=192.168.1.1"
+    nameserver = "192.168.1.20"
+    searchdomain = "local.cyklodev.com"
+
+    sshkeys = var.ssh_key
     }

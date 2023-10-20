@@ -7,8 +7,8 @@
 ### shell
     alias cp='cp -i'
     alias dfg='df -h'
-    alias dus='du -ms '
-    alias dusx='du -xms '
+    alias dus='du -ms $(ls -A)'
+    alias dusx='du -xms $(ls -A)'
     alias h='history'
     alias j='jobs -l'
     alias l.='ls -d .* --color=auto'
