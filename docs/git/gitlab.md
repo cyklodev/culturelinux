@@ -1,11 +1,16 @@
 # Gitlab
 
+## Install
+### Docker
+  https://github.com/sameersbn/docker-gitlab
+#### Backup 
+  docker-compose down
+  docker-compose run --rm gitlab app:rake gitlab:backup:create
+
 ## CICD
 ### Register runner
     
-
 ## CLI glab
-
 ### install 
   wget https://gitlab.com/gitlab-org/cli/-/releases/v1.33.0/downloads/glab_1.33.0_Linux_x86_64.tar.gz
   tar xvzf glab_1.33.0_Linux_x86_64.tar.gz

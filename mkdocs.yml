@@ -35,3 +35,7 @@ nav:
     - 'Email' : debian/msmtp.md        
   - Databases: 
     - 'MongoDB' : databases/mongodb.md    
+  - Virtualization:
+    - 'Proxmox' : virtualization/proxmox.md      
+  - 'Infra As Code':
+    - 'OpenToFu' : iac/opentofu.md      
