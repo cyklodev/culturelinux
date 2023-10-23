@@ -26,13 +26,16 @@ nav:
   - Linux: 
     - 'Environement' : linux/environnement.md
     - 'History' : linux/history.md
-    - 'Users' : linux/users.md
-    - 'Security' : linux/security.md    
+    - 'Network' : debian/network.md    
     - 'Nmap' : linux/nmap.md
+    - 'Security' : linux/security.md        
+    - 'Users' : linux/users.md    
   - Debian: 
+    - 'Email' : debian/msmtp.md       
     - 'Network' : debian/network.md
     - 'NFTables' : debian/nftables.md    
-    - 'Email' : debian/msmtp.md        
+    - 'Snap' : debian/snap.md     
+    - 'UFW' : debian/ufw.md            
   - Databases: 
     - 'MongoDB' : databases/mongodb.md    
   - Virtualization:

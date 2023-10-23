@@ -1,4 +1,4 @@
-# Ckd-ocs
+# CultureLinux
 
 ## Description
 This is a open documentation build by Cykldev
