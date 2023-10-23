@@ -1,5 +1,5 @@
-site_name: CKDocs
-site_url: https://ckd-ocs.kube.cyklodev.com
+site_name: CultureLinux
+site_url: https://cyklodev.github.io/culturelinux/
 
 theme: 
   name: material

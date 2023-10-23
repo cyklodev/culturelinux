@@ -117,12 +117,12 @@ db.auth('admin','mysqlpwd')
 ```
 
 ```
-mongosh --authenticationDatabase admin --norc -u otheruser -p
+mongosh --authenticationDatabase admin
 ```
 
 ### no autoconnect
 ```
-mongosh --authenticationDatabase admin
+mongosh --authenticationDatabase admin --norc -u otheruser -p
 ```
 
 
