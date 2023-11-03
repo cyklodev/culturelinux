@@ -37,8 +37,14 @@ nav:
     - 'Snap' : debian/snap.md     
     - 'UFW' : debian/ufw.md            
   - Databases: 
-    - 'MongoDB' : databases/mongodb.md    
+    - 'MariaDB' : databases/mariadb.md    
+    - 'MongoDB' : databases/mongodb.md   
+    - 'SqlServer' : databases/sqlserver.md           
   - Virtualization:
     - 'Proxmox' : virtualization/proxmox.md      
   - 'Infra As Code':
     - 'OpenToFu' : iac/opentofu.md      
+  - 'Containers':
+    - 'OpenToFu' : containers/docker.md        
+  - Git:
+    - 'Gitlab' : git/gitlab.md        
