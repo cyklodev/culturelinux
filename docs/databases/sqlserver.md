@@ -28,12 +28,56 @@
     $ /opt/mssql-tools/bin/sqlcmd -S 192.168.1.110 -U SA
 #### not interactive
 * not secure
+```
     $ /opt/mssql-tools/bin/sqlcmd -S 192.168.1.110 -U SA -P 'xXxXxxX'
+```
 * a little better
-    $ export SQLCMDPASSWORD='plopAge1!'
+```
+    $ export SQLCMDPASSWORD='xXxXxxX'
     $ /opt/mssql-tools/bin/sqlcmd -S 192.168.1.110 -U SA
+```    
 #### query
     $ /opt/mssql-tools/bin/sqlcmd -S 192.168.1.110 -U SA -Q "SELECT @@version GO"
+#### script
+    $ /opt/mssql-tools/bin/sqlcmd -S 192.168.1.110 -U SA -i script-file.sql
 
 ### Query 
 #### Database
+* get current
+```
+    select DB_NAME()
+    GO
+```    
+* get all 
+```
+    select name from sys.databases
+    GO
+```    
+* create
+```
+    IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'datalake')
+    BEGIN
+    CREATE DATABASE datalake;
+    END;
+    GO
+```    
+#### Table
+* get all
+```
+    use datalake
+    SELECT name,crdate FROM SYSOBJECTS WHERE xtype = 'U';
+    GO
+```    
+* Describe
+```
+    exec sp_columns MyTable
+```    
+#### Columns
+* add column 
+```
+    ALTER TABLE MyTable ADD zone varchar(255)
+```
+* delete column 
+```
+    ALTER TABLE MyTable DROP COLUMN zone
+```
