@@ -27,3 +27,28 @@
 ## Extract permissions
     use mysql
     select distinct concat('SHOW GRANTS FOR ''' , user, '''@''',host,''';') as query from user;
+
+## Tables
+### Copy
+    CREATE TABLE new_table_name AS
+    SELECT * FROM old_table_name;
+
+## Log requests
+### Activate
+    SET global general_log = 1;
+### Destination
+#### Table
+```
+    SET global log_output = 'table';
+```
+```
+    select * from general_log;
+    select * from mysql.general_log where command_type = 'Query' and user_host = 'user[user] @ localhost []'
+```
+#### File
+```
+    SET global log_output = 'file';
+    SET global general_log_file = '/tmp/mysql_trace.log';
+```
+### Desactivate
+    SET global general_log = 0;

@@ -81,3 +81,9 @@
 ```
     ALTER TABLE MyTable DROP COLUMN zone
 ```
+
+#### insert
+##### datetime
+```
+    INSERT [dbo].[MyTable] ([ID], [DATEMyDatetime]) VALUES (500, convert(datetime, '2022-11-17 00:00:00', 121))
+``` 
