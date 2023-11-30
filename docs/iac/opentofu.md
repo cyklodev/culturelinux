@@ -6,8 +6,8 @@
 
 ## Providers
 
-☠️ https://github.com/Telmate/terraform-provider-proxmox
-✅ https://github.com/bpg/terraform-provider-proxmox
+* ☠️ https://github.com/Telmate/terraform-provider-proxmox
+* ✅ https://github.com/bpg/terraform-provider-proxmox
 
 ## Auth (Proxmox >= 8.1)
 ### Add role
