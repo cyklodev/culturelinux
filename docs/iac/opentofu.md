@@ -1,35 +1,53 @@
 # OpenToFu
 ## Install
-    wget https://github.com/opentofu/opentofu/releases/download/v1.6.0-alpha3/tofu_1.6.0-alpha3_linux_amd64.zip
+    wget https://github.com/opentofu/opentofu/releases/download/v1.6.0-alpha5/tofu_1.6.0-alpha5_linux_amd64.zip
     unzip tofu*
     cp tofu /usr/local/bin/
 
-## Files 
-### provider.tf
+## Providers
+
+☠️ https://github.com/Telmate/terraform-provider-proxmox
+✅ https://github.com/bpg/terraform-provider-proxmox
+
+## Auth (Proxmox >= 8.1)
+### Add role
+    pveum role add tofu -privs "VM.Allocate VM.Clone VM.Config.CDROM VM.Config.CPU VM.Config.Cloudinit VM.Config.Disk VM.Config.HWType VM.Config.Memory VM.Config.Network VM.Config.Options VM.Monitor VM.Audit VM.PowerMgmt Datastore.AllocateSpace Datastore.Audit SDN.Use"
+### Add user
+    Interface Add PAM user
+### link role user
+    pveum aclmod / -user tofu@pam -role tofu
+### generate token
+    pveum user token add tofu@pam fortofu -expire 0 -privsep 0 -comment "Tofu token"
+### test token
+    curl -X GET 'https://$PROXMOX_URL:8006/api2/json/nodes' -H 'Authorization: PVEAPIToken=terraform@pve!terraform=$TOKEN'
+
+
+### Files 
+#### provider.tf
     terraform {
         required_providers {
             proxmox =  {
-            source = "Telmate/proxmox"
-            version = "2.9.11"
+            source = "bpg/proxmox"
+            version = ">= 0.38.1"
             }
         }
     }
     provider "proxmox" {
-        pm_api_url = var.pm_api_url
-        pm_api_token_id= var.pm_api_token_id
-        pm_api_token_secret= var.pm_api_token_secret
-        pm_tls_insecure = true
+        endpoint = var.pm_api_url
+        api_token = var.pm_api_token
+        insecure = false  # Warning TLS cert of proxmox webui must be valid (Let's Encrypt)
+        ssh {
+            agent    = true
+            username = "root"
+        }
     }
 
 ### vars.tf
     variable  "pm_api_url" {
         default =  "https://$PROXMOX_URL:8006/api2/json"
     }
-    variable  "pm_api_token_id" {
-        default =  "terraform@pve!terraform"
-    }
-    variable  "pm_api_token_secret" {
-        default =  "$TOKEN"
+    variable  "pm_api_token" {
+        default =  "tofu@pam!fortofu=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
     }
     variable  "target_node" {
         default =  "proxmox2"
@@ -38,40 +56,64 @@
         default =  "debian12-temp"
     }
     variable  "ssh_key" {
-        default =  "ssh-ed25519 XXXXXXXXXXXXXXXX clinux@mothership"
-    }
+        default =  "ssh-ed25519 XXXXXXXX clinux@rocky9.local"
+
 
 ### main.tf
-    resource "proxmox_vm_qemu" "tp_servers" {
-    desc = "Deploiement VM Debian 12 sur Proxmox"
-    count = 1
-    name = "prox2-debian-${count.index + 1}"
-    target_node = var.target_node
-    clone = var.clone
-    os_type = "cloud-init"
-    cores = 2
-    sockets = 1
-    cpu = "host"
-    memory = 2048
-    scsihw = "virtio-scsi-pci"
-    bootdisk = "scsi0"
+    resource "proxmox_virtual_environment_vm" "debian_vm" {
+        name        = "bpg-debian12"
+        description = "Managed by opentofu"
+        tags        = ["opentofu", "debian"]
+        node_name = var.target_node
+        clone {
+            vm_id = "1000"
+        }
 
-    disk {
-        slot = 0
-        size = "40G"
-        type = "scsi"
-        storage = "local-lvm"
-        #iothread = 1
-    }
+        cpu {
+            cores = 2
+            type = "host"
+            numa = true
+        }
+        memory {
+            dedicated = 2048
+        }
+        network_device {
+            bridge = "vmbr0"
+            model = "virtio"
+        }
 
-    network {
-        model = "virtio"
-        bridge = "vmbr0"
-    }
+        efi_disk {
+            datastore_id = "local-lvm"
+            file_format = "raw"
+            type    = "4m"
+        }
 
-    ipconfig0 = "ip=192.168.1.${count.index + 170}/24,gw=192.168.1.1"
-    nameserver = "192.168.1.20"
-    searchdomain = "local.cyklodev.com"
+        disk {
+            datastore_id = "local-lvm"
+            file_format = "raw"
+            interface = "scsi0"
+            size = "10"
+        }
 
-    sshkeys = var.ssh_key
+        operating_system {
+            type = "l26"
+        }
+        machine = "q35"
+        agent {
+            enabled = false
+        }
+
+        initialization {
+            ip_config {
+                ipv4 {
+                    address = "192.168.1.170/24"
+                    gateway = "192.168.1.1"
+                }
+            }
+            user_account {
+                keys     = [var.ssh_key]
+                password = "tofu"
+                username = "debian"
+            }
+        }
     }
