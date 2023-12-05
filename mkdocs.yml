@@ -43,8 +43,9 @@ nav:
   - Virtualization:
     - 'Proxmox' : virtualization/proxmox.md      
   - 'Infra As Code':
-    - 'OpenToFu' : iac/opentofu.md      
+    - 'Ansible' : iac/ansible.md      
+    - 'OpenToFu' : iac/opentofu.md   
   - 'Containers':
-    - 'OpenToFu' : containers/docker.md        
+    - 'Docker' : containers/docker.md
   - Git:
     - 'Gitlab' : git/gitlab.md        
