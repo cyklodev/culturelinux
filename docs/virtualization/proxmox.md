@@ -1,4 +1,5 @@
 # Proxmox
+
 ## Build template
 ### get qcow image
     cd /tmp && wget https://cloud.debian.org/images/cloud/bookworm/20231013-1532/debian-12-genericcloud-amd64-20231013-1532.qcow2
@@ -10,4 +11,14 @@
     qm set 1000 --ide2 local-lvm:cloudinit
     qm set 1000 --serial0 socket --vga serial0
     rm -f /tmp/debian-12-genericcloud-amd64-20231013-1532.qcow2
+
+## Extend HD
+### Gui
+    VM > Hardware > HD > Disk Action > Resize 
+### Cli
+    qm resize VMID DISKNAME +5G
+### Guest 
+    growpart /dev/sda 1
+    resize2fs /dev/sda1 
+
 
