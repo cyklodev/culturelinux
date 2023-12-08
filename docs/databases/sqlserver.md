@@ -22,6 +22,22 @@
     # apt install mssql-tools unixodbc-dev
     # ln -s /opt/mssql-tools/bin/sqlcmd /usr/local/bin/sqlcmd
 
+## User
+### Create
+    use master 
+    CREATE LOGIN clinux WITH PASSWORD = 'Clinux';
+
+    IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'db_clinux')
+    BEGIN
+    CREATE DATABASE db_clinux;
+    END;
+    GO
+
+    use db_clinux
+    CREATE USER u_clinux FOR LOGIN clinux;
+    ALTER ROLE db_owner ADD MEMBER u_clinux ;
+    GO
+
 ## Usage
 ### Connect
 #### interactive

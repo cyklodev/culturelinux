@@ -26,17 +26,46 @@
 ## create 
 ```
 ---
-- name: Test user
+- name : test user
   hosts: bpg-debian12
   remote_user: debian
-  become: yes
+  become: true
 
   tasks:
-  - name: test user
+  - name: get id
     shell: id
     register: results
+  - name: Add the user 'clinux'
+    ansible.builtin.user:
+      name: clinux
+      comment: created by ansible
+  - name: break
+    shell: exit 1
+    ignore_errors: true
+  - name: Remove the user 'clinux'
+    ansible.builtin.user:
+      name: clinux
+      state: absent
+      remove: yes
+
+  - name: Install some packages
+    package:
+      name:
+        - htop
+        - curl
+        - nmon
+        - net-tools
+        - nginx
+      state: latest
+
+  - name: Make sure a service unit is running
+    ansible.builtin.systemd_service:
+      state: started
+      enabled: true
+      name: nginx
+
   - debug:
-      var: results.stdout
+      var: results.stdout 
 ```
 ## Execute
     ansible-playbook plb_get_user.yml -i inventory
