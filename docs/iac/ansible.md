@@ -23,7 +23,7 @@
     export ANSIBLE_INVENTORY=inventory
     
 # playbook
-## create 
+## create test
 ```
 ---
 - name : test user
@@ -67,7 +67,37 @@
   - debug:
       var: results.stdout 
 ```
+## create post tofu root
+```
+---
+- name: "tofu : setup root key"
+  ansible.builtin.copy:
+    remote_src: true
+    src: /home/debian/.ssh/authorized_keys
+    dest: /root/.ssh/authorized_keys
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: "tofu : allow root sshkey"
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '(.*)PermitRootLogin(.*)$'
+    line: 'PermitRootLogin without-password'
+    owner: root
+
+- name: "tofu : reload ssh"
+  service:
+    name: ssh
+    state: restarted
+```
+
 ## Execute
     ansible-playbook plb_get_user.yml -i inventory
     export ANSIBLE_INVENTORY=inventory
     ansible-playbook plb_get_user.yml
+
+
+# Roles 
+## Create 
+    ansible-galaxy init /etc/ansible/roles/debian_tofu_post --offline

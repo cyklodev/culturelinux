@@ -11,4 +11,4 @@
     address 192.168.1.83/24
     gateway 192.168.1.1
     dns-nameservers 192.168.1.20 192.168.1.1
-    dns-domain local.cyklodev.com
+    dns-domain local.culturelinux.lan
