@@ -3,20 +3,35 @@
 ### update / upgrade
 #### update 
 refresh repository
-    # apt update 
+```
+# apt update 
+```
+
 #### upgrade
 really upgrade packages
-    # apt upgrade
+```
+# apt upgrade
+```
+    
 really upgrade packages and remove unused packages
-    # apt full-upgrade
+```
+# apt full-upgrade
+```
+    
 
 ### install package
     # apt install nmon
 
 ### remove package
-    # apt remove nmon
+```
+# apt remove nmon
+```
+    
 remove + purge 
-    # apt autoremove nmon
+```
+# apt autoremove nmon
+```
+    
 
 ### package provided by
     # apt install apt-file

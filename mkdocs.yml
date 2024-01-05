@@ -34,7 +34,6 @@ nav:
     - 'Packages' : debian/packages.md       
     - 'Email' : debian/msmtp.md       
     - 'Network' : debian/network.md
-    - 'NFTables' : debian/nftables.md    
     - 'Snap' : debian/snap.md     
     - 'UFW' : debian/ufw.md            
   - Databases: 

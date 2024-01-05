@@ -53,9 +53,14 @@
 ### Desactivate
     SET global general_log = 0;
 
+## Backup
+### All
+    
+## Restore
+
 ## Upgrade
     # service mariadb stop
-    # yum remove MariaDB-server
+    # yum remove MariaDB-*
     # cat /etc/yum.repos.d/MariaDB.repo
     # sed -i 's/11\.1/11\.2/' /etc/yum.repos.d/MariaDB.repo
     # yum install MariaDB-server
