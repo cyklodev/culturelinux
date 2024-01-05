@@ -39,16 +39,16 @@
 ### Destination
 #### Table
 ```
-    SET global log_output = 'table';
+SET global log_output = 'table';
 ```
 ```
-    select * from general_log;
-    select * from mysql.general_log where command_type = 'Query' and user_host = 'user[user] @ localhost []'
+select * from general_log;
+select * from mysql.general_log where command_type = 'Query' and user_host = 'user[user] @ localhost []'
 ```
 #### File
 ```
-    SET global log_output = 'file';
-    SET global general_log_file = '/tmp/mysql_trace.log';
+SET global log_output = 'file';
+SET global general_log_file = '/tmp/mysql_trace.log';
 ```
 ### Desactivate
     SET global general_log = 0;

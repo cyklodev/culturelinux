@@ -6,7 +6,7 @@
     pip3 install --user -r requierments.txt
 
 ## Preview
-    mkdics serve
+    mkdocs serve
 
 ## Build
-    mkdics build    
+    mkdocs build    

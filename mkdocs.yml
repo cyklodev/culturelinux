@@ -39,7 +39,8 @@ nav:
   - Databases: 
     - 'MariaDB' : databases/mariadb.md    
     - 'MongoDB' : databases/mongodb.md   
-    - 'SqlServer' : databases/sqlserver.md           
+    - 'SqlServer' : databases/sqlserver.md
+    - 'InfluxDB' : databases/influxdb.md             
   - Virtualization:
     - 'Proxmox' : virtualization/proxmox.md      
   - 'Infra As Code':

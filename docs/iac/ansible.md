@@ -110,12 +110,16 @@ mkdir -p roles/post_tofu/tasks
 #### tasks
 ```
 cat << EOF > roles/post_tofu/tasks/main.yml
+```
+```
 ---
 - include_tasks: copy_ssh_key_root.yml
 EOF
 ```
 ```
 cat << EOF > roles/post_tofu/tasks/copy_ssh_key_root.yml
+```
+```
 ---
 - name: copy ssh authozied_keys to root
   ansible.builtin.copy:
@@ -137,6 +141,8 @@ EOF
 #### playbook
 ```
 cat << EOF > deploy_post_tofu.yml
+```
+```
 ---
 - name : post actions tofu
   hosts: debian12
@@ -159,6 +165,8 @@ mkdir -p roles/nginx/{tasks,handlers,files}
 ### tasks
 ```
 cat << EOF > roles/nginx/tasks/main.yml
+```
+```
 ---
 - include_tasks: install_packages.yml
 - include_tasks: configuration.yml
@@ -166,6 +174,8 @@ EOF
 ```
 ```
 cat << EOF > roles/nginx/tasks/install_packages.yml
+```
+```
 ---
 - name: Install nginx
   package:
